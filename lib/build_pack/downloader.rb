@@ -2,10 +2,10 @@ require 'net/http'
 
 module BuildPack
   class Downloader
-    MYSQL_BASE_URL = "http://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.7/"
+    MYSQL_BASE_URL = "https://security.ubuntu.com/ubuntu/pool/main/m/mysql-5.7/"
 
     # example client: "mysql-client-core-5.7_5.7.22-0ubuntu0.16.04.1_amd64.deb"
-    REGEX = /.*(mysql-client-core-5\.7_5\.7\.\d\d-0ubuntu0\.18\.\d\d\.\d_amd64.deb).*/
+    REGEX = /.*(mysql-client-5\.7_5\.7\.\d\d-0ubuntu0\.18\.\d\d\.\d_amd64.deb).*/
 
     class << self
       def download_latest_client_to(path)
