@@ -3,11 +3,11 @@ require 'spec_helper'
 TMP_DIR = "tmp"
 CACHE_DIR = "#{TMP_DIR}/cache_dir"
 BUILD_DIR = "#{TMP_DIR}/build_dir"
-DPKG_BIN_DIR = "#{BUILD_DIR}/tmp/mysql-client-core/usr/bin"
+DPKG_BIN_DIR = "#{BUILD_DIR}/tmp/mysql-client/usr/bin"
 DPKG_BIN_OUTPUT = "#{DPKG_BIN_DIR}/mysql"
 MYSQL_INSTALLED_BINARY = "#{BUILD_DIR}/bin/mysql"
 
-EXPECTED_DEB_COMMAND = "dpkg -x #{CACHE_DIR}/mysql-client-core.deb #{BUILD_DIR}/tmp/mysql-client-core"
+EXPECTED_DEB_COMMAND = "dpkg -x #{CACHE_DIR}/mysql-client.deb #{BUILD_DIR}/tmp/mysql-client"
 STUBBED_DEB_COMMAND = "mkdir -p #{DPKG_BIN_DIR}; touch #{DPKG_BIN_OUTPUT}"
 
 describe BuildPack::Installer do
@@ -17,7 +17,7 @@ describe BuildPack::Installer do
   after{`rm -r #{TMP_DIR}`}
 
   context "when cache already has client" do
-    before{`touch #{CACHE_DIR}/mysql-client-core.deb`}
+    before{`touch #{CACHE_DIR}/mysql-client.deb`}
 
     it "installs cached client" do
       expect(described_class).to receive(:`).with(EXPECTED_DEB_COMMAND) {`#{STUBBED_DEB_COMMAND}`}
