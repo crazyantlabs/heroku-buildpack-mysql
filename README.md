@@ -1,8 +1,8 @@
-# heroku-buildpack-mysql
+# heroku-buildpack-mysql-client
 
-[![Build Status](https://secure.travis-ci.org/Shopify/heroku-buildpack-mysql.png)](http://travis-ci.org/Shopify/heroku-buildpack-mysql)
+[![Build Status](https://github.com/crazyantlabs/heroku-buildpack-mysql-client/actions/workflows/ruby.yml/badge.svg)](https://github.com/crazyantlabs/heroku-buildpack-mysql-client/actions)
 
-This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for vendoring just the `mysql` binary from the `mysql-client-core` deb package.
+This is a [Heroku buildpack](http://devcenter.heroku.com/articles/buildpacks) for vendoring `mysql` binaries from the `mysql-client` deb package.
 
 ## Versions
 
