@@ -1,5 +1,7 @@
 require 'fileutils'
 
+include File::Constants
+
 module BuildPack
   class Installer
     class << self
@@ -55,15 +57,14 @@ module BuildPack
       end
 
       def fix_perms_and_mv_binaries
-        # TODO: Doing a glob for some reason causes issues on heroku-16,
-        #       erroring out as it can't find the files to chmod and mv.
-        #       Specifying `mysqldump` specifically for now. Otherwise use:
-        # ```
-        # binaries = Dir.glob("#{@mysql_binaries}/*")
-        # ```
-        mysqldump_binary = Dir.glob("#{@mysql_binaries}/mysql")
-        FileUtils.chmod("u=wrx", mysqldump_binary)
-        FileUtils.mv(mysqldump_binary, @bin_path)
+        binaries = Dir.glob("#{@mysql_binaries}/*")
+        binaries.each do |binary|
+          FileUtils.chmod("u=wrx", binary)
+          FileUtils.mv(binary, @bin_path)
+        rescue 
+          # Some binaries are symbolic links and chmod fails on symlinks.
+          Logger.log "Failed to chmod #{binary}"
+        end
       end
 
       def cleanup
